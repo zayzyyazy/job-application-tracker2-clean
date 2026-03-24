@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "localhost-remote",
+  "description": "Allow the embedded webview to use Tauri APIs when loading Next from http://localhost or http://127.0.0.1",
+  "windows": ["main"],
+  "remote": {
+    "urls": ["http://localhost:*", "http://127.0.0.1:*"]
+  },
+  "permissions": ["core:default"]
+}

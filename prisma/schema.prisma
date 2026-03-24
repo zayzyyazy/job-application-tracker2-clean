@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum JobStatus {
+  SAVED
+  APPLIED
+  HEARD_BACK
+  INTERVIEW
+  REJECTED
+  OFFER
+}
+
+model Job {
+  id           Int       @id @default(autoincrement())
+  url          String
+  company      String?
+  title        String?
+  location     String?
+  status       JobStatus @default(SAVED)
+  appliedAt    DateTime?
+  deadline     DateTime?
+  notes        String?
+  source       String    @default("manual")
+  // Stores an array of skill names as JSON, e.g. ["React", "TypeScript"]
+  skillsNeeded Json?
+  fitScore     Float?
+  aiSummary    String?
+  aiRoleCategory        String?
+  aiSeniority           String?
+  aiSkillsNeeded        Json?
+  aiMissingSkills       Json?
+  aiFitLabel            String?
+  aiFitReasoning        String?
+  aiActionRecommendation String?
+  aiUrgency             String?
+  aiLastAnalyzedAt      DateTime?
+  aiRawSummary          String?
+  fetchedTitle          String?
+  fetchedContentText    String?
+  fetchedContentSource  String?
+  fetchedAt             DateTime?
+  fetchStatus           String?
+  fetchError            String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Profile {
+  // Single-user MVP: we keep one profile row with id=1.
+  id                 Int      @id
+  fullName           String?
+  headline           String?
+  university         String?
+  degreeProgram      String?
+  currentSemester    String?
+  bio                String?
+  targetRoles        Json?
+  preferredLocations Json?
+  skills             Json?
+  tools              Json?
+  interests          Json?
+  workPreferences    String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
