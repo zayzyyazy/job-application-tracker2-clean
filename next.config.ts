@@ -7,6 +7,18 @@ const internalHost = process.env.TAURI_DEV_HOST || "localhost";
 const nextConfig: NextConfig = {
   // Required for packaging a runnable `next start`-style server for the desktop build.
   output: "standalone",
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        ],
+      },
+    ];
+  },
   images: {
     unoptimized: true,
   },

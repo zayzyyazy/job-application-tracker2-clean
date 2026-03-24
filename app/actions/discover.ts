@@ -176,10 +176,7 @@ export async function searchSuggestedJobsAction(
     };
   } catch (e) {
     console.error("[searchSuggestedJobsAction]", e);
-    return {
-      ok: false,
-      message: `Discovery error: ${e instanceof Error ? e.message : String(e)}`,
-    };
+    return { ok: false, message: "Discovery failed. Check server logs." };
   }
 }
 
